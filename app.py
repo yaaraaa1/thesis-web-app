@@ -3,18 +3,9 @@ from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 import os
 
-replicate_api_token = os.getenv('REPLICATE_API_TOKEN')
+REPLICATE_API_TOKEN = os.environ.get('REPLICATE_API_TOKEN')
 
 app = Flask(__name__)
-
-# if __name__ == '__main__':
-#     # Bind to PORT if defined, otherwise default to 5000.
-#     port = int(os.environ.get('PORT', 5000))
-#     app.run(host='0.0.0.0', port=port)
-
-# app.run(host="0.0.0.0", port=5000)
-
-token = os.environ.get('REPLICATE_API_TOKEN')
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
