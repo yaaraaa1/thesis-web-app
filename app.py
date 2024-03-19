@@ -1,16 +1,18 @@
-
-from botocore.exceptions import NoCredentialsError
 import replicate
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 import os
-import tempfile
-
-
 
 app = Flask(__name__)
 
-token = os.getenv('REPLICATE_API_TOKEN')
+# if __name__ == '__main__':
+#     # Bind to PORT if defined, otherwise default to 5000.
+#     port = int(os.environ.get('PORT', 5000))
+#     app.run(host='0.0.0.0', port=port)
+
+# app.run(host="0.0.0.0", port=5000)
+
+token = os.environ.get('REPLICATE_API_TOKEN')
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -18,9 +20,13 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 
-@app.route('/')
-def home():
-    return render_template('index.html')  # You will create this file next
+@app.route('/progression', methods=['GET'])
+def progression():
+    return render_template('index.html', target_age="default")
+
+@app.route('/static', methods=['GET'])
+    def static():
+        return render_template('index.html', target_age="70")
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -35,12 +41,11 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         with open(filepath, "rb") as file:
-            url = transform_image(file, target_age="70")
+            url = transform_image(file, target_age="default")
         os.remove(filepath)
         return redirect(url)
 
     return 'Upload unsuccessful', 500
-        
 
 def transform_image(url, target_age):
     # Use the Replicate API to transform the image

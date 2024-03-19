@@ -3,13 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload your Image</title>
+    <title>Upload Your Image</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 15px; /* Padding for smaller screens */
+        }
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px; /* Max width for larger screens */
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px; /* Added spacing below the header */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Spacing between form elements */
+        }
+        input[type="file"] {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            background-color: #4CAF50; /* Changed color for more visibility */
+            color: white;
+            border: none;
+            padding: 12px 20px; /* Larger padding for a better touch area */
+            border-radius: 5px;
+            font-weight: bold; /* Make the text a bit bolder */
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        .description {
+            margin-top: 20px; /* Increased spacing above the description */
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5; /* Improved line height for readability */
+        }
+    </style>
 </head>
 <body>
-    <h2>Upload your image</h2>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload Image">
-    </form>
+    <div class="container">
+        <h2>Upload Your Image</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload Image">
+        </form>
+        <p class="description">After uploading, the filtering process will take about 15 seconds. Please wait patiently for the magic to happen!</p>
+    </div>
 </body>
 </html>
