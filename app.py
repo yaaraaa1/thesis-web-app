@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 import os
 
-app = Flask(__name__)
+the_app = Flask(__name__)
 
 # if __name__ == '__main__':
 #     # Bind to PORT if defined, otherwise default to 5000.
