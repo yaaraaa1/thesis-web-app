@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 import os
 
+replicate_api_token = os.getenv('REPLICATE_API_TOKEN')
+
 app = Flask(__name__)
 
 # if __name__ == '__main__':
@@ -36,10 +38,8 @@ def upload_file():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
-        print("made it")
         with open(filepath, "rb") as file:
             url = transform_image(file)
-        print("made it again")
         os.remove(filepath)
         return redirect(url)
 
@@ -56,7 +56,7 @@ def transform_image(url):
             }
         )
         return output  # Assuming 'url' is the key for the image URL in the output
-    except Exception as e:
+    except Exception:
         return "/error"  # Return error message if API call fails
 
 if __name__ == '__main__':
