@@ -24,7 +24,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 def home():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET','POST'])
 def upload_file():
     if 'file' not in request.files:
         return 'No file part'
@@ -36,11 +36,12 @@ def upload_file():
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
+        print("made it")
         with open(filepath, "rb") as file:
             url = transform_image(file)
+        print("made it again")
         os.remove(filepath)
         return redirect(url)
-
     return 'Upload unsuccessful', 500
 
 def transform_image(url):
