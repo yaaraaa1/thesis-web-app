@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, redirect
 from werkzeug.utils import secure_filename
 import os
 
-the_app = Flask(__name__)
+app = Flask(__name__)
 
 # if __name__ == '__main__':
 #     # Bind to PORT if defined, otherwise default to 5000.
@@ -15,7 +15,7 @@ the_app = Flask(__name__)
 token = os.environ.get('REPLICATE_API_TOKEN')
 
 UPLOAD_FOLDER = 'uploads'
-the_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
