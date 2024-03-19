@@ -42,7 +42,6 @@ def upload_file():
         print("made it again")
         os.remove(filepath)
         return redirect(url)
-    return 'Upload unsuccessful', 500
 
 def transform_image(url):
     # Use the Replicate API to transform the image
@@ -58,7 +57,7 @@ def transform_image(url):
         )
         return output  # Assuming 'url' is the key for the image URL in the output
     except Exception as e:
-        return str(e)  # Return error message if API call fails
+        return "/error"  # Return error message if API call fails
 
 if __name__ == '__main__':
     app.run(debug=True)
