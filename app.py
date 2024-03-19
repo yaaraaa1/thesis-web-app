@@ -43,7 +43,7 @@ def upload_file():
 
     return 'Upload unsuccessful', 500
 
-def transform_image(url, target_age):
+def transform_image(url):
     # Use the Replicate API to transform the image
     # Assuming your environment variable is correctly set,
     # the client will automatically use your API token.
