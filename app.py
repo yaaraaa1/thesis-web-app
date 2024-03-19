@@ -20,13 +20,13 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 
-@app.route('/progression', methods=['GET'])
-def progression():
-    return render_template('index.html', target_age="default")
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-@app.route('/static', methods=['GET'])
-    def static():
-        return render_template('index.html', target_age="70")
+# @app.route('/static', methods=['GET'])
+#     def static():
+#         return render_template('index.html', target_age="70")
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -41,7 +41,7 @@ def upload_file():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         with open(filepath, "rb") as file:
-            url = transform_image(file, target_age="default")
+            url = transform_image(file)
         os.remove(filepath)
         return redirect(url)
 
@@ -56,7 +56,7 @@ def transform_image(url, target_age):
             "yuval-alaluf/sam:9222a21c181b707209ef12b5e0d7e94c994b58f01c7b2fec075d2e892362f13c",
             input={
                 "image": url,
-                "target_age": target_age
+                "target_age": "70"
             }
         )
         return output  # Assuming 'url' is the key for the image URL in the output
