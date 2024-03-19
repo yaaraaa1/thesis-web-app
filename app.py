@@ -23,11 +23,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 @app.route('/')
 def home():
     return render_template('index.html')
-
-# @app.route('/static', methods=['GET'])
-#     def static():
-#         return render_template('index.html', target_age="70")
-
+    
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
